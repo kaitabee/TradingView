@@ -1,5 +1,5 @@
 //@version=6
-indicator("BunnyPA: CE and PE Dynamic Label Suggestion", overlay=true)
+indicator("BunnyPA: StriPrice", overlay=true)
 currRed = close < open
 currGreen = close > open
 peStrikePrice = math.round((open + close) / 2 / 100) * 100
