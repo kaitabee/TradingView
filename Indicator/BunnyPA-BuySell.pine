@@ -1,0 +1,10 @@
+//@version=6
+indicator("BunnyPA: Buy/Sell", overlay=true)
+prevRed   = close[1] < open[1]
+currGreen = close > open
+prevGreen = close[1] > open[1]
+currRed   = close < open
+buySignal = prevRed and currGreen
+sellSignal = prevGreen and currRed
+plotshape(buySignal, title="Buy Signal", location=location.belowbar, color=color.green, style=shape.labelup, text="BUY")
+plotshape(sellSignal, title="Sell Signal", location=location.abovebar, color=color.red, style=shape.labeldown, text="SELL")
