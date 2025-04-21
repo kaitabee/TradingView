@@ -1,0 +1,12 @@
+//@version=6
+indicator("BunnyPA: CE and PE Dynamic Label Suggestion", overlay=true)
+currRed = close < open
+currGreen = close > open
+peStrikePrice = math.round((open + close) / 2 / 100) * 100
+ceStrikePrice = math.round((open + close) / 2 / 100) * 100
+candleRange = high - low
+multiplier = timeframe.period == "1" ? 0.5 : timeframe.period == "5" ? 1.0 : timeframe.period == "15" ? 1.5 : timeframe.period == "30" ? 2.0 : (timeframe.period == "60" or timeframe.period == "1h") ? 2.5 : timeframe.period == "D" ? 3.0 : timeframe.period == "W" ? 4.0 : timeframe.period == "M" ? 5.0 : 1.5
+if currRed
+    label.new(bar_index, high + candleRange * multiplier, "PE: " + str.tostring(peStrikePrice), style=label.style_label_up, color=color.blue, textcolor=color.white, size=size.small)
+if currGreen and close[1] < open[1]
+    label.new(bar_index, low - candleRange * multiplier, "CE: " + str.tostring(ceStrikePrice), style=label.style_label_down, color=color.green, textcolor=color.white, size=size.small)
